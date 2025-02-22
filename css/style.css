@@ -1,0 +1,140 @@
+@import "https://unpkg.com/open-props";
+@import "https://unpkg.com/open-props/normalize.min.css";
+
+/* Styesheet for Binary Risk Assessment */
+:root {
+  --color-white: #fff;
+  --color-black: #000;
+
+  --color-primary: #3498db;
+  --color-secondary: #e74c3c;
+  --color-tertiary: #f39c12;
+  --color-quaternary: #2c3e50;
+  
+  --color-low: #2ecc71;
+  --color-medium: #f1c40f;
+  --color-high: #e74c3c;
+}
+
+/* Base styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-3);
+}
+
+.column {
+  flex: 1;
+  padding: var(--size-4);
+}
+
+.column--one {
+  flex: 1;
+  min-width: 350px;
+  padding: var(--size-4);
+}
+
+.column--two {
+  flex: 1;
+  max-width: 350px;
+  padding: var(--size-4);
+}
+
+header {
+  background-color: var(--color-quaternary);
+  color: var(--color-white);
+  padding: 1rem;
+  text-align: center;
+  display: flex;
+}
+
+.btn--reset {
+  background-color: var(--color-secondary);
+  border: none;
+  border-radius: var(--radius-2);
+  color: var(--color-white);
+  cursor: pointer;
+  display: inline-block;
+  font-size: var(--font-size-3);
+  padding: var(--size-2) var(--size-3);
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Heading styles */
+h1 {
+  font-size: var(--font-size-6);
+  margin-bottom: 0;
+  max-inline-size: unset;
+  text-align: center;
+  width: 100%;
+}
+h2 {
+  font-size: var(--font-size-5);
+  margin-bottom: 1rem;
+}
+
+
+/* Form styles */
+label {
+  flex-direction: row;
+  gap: var(--size-3);
+  line-height: 1.2;
+  display: flex;
+  font-size: var(--font-size-3);
+  margin-bottom: 1rem;
+}
+
+/* Results styles */
+#scores {
+  display: flex;
+  flex-direction: column;
+  font-weight: 900;
+  gap: var(--size-3);
+}
+
+.score__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.score {
+  padding: var(--size-1) var(--size-2);
+  border-radius: 100px;
+  margin-left: 0.5rem;
+  font-weight: bold;
+  min-width: 120px;
+  text-align: center;
+}
+
+.score--low {
+  background-color: var(--color-low);
+  color: var(--color-white);
+}
+
+.score--medium {
+  background-color: var(--color-medium);
+  color: var(--color-white);
+}
+
+.score--high {
+  background-color: var(--color-high);
+  color: var(--color-white);
+}
+
+
+/* Skip nav */
+.lowvis {
+  position: absolute;
+  left: -9999px;
+}
+
+.lowvis:focus-within {
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 1rem;
+}
