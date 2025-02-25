@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('button[name="reset"]').addEventListener('click', function() {
     const form = document.getElementById('assessment-form');
     const checkboxes = form.querySelectorAll('input[type="checkbox"]');
+    const textbox = document.querySelector('input[type="text"]');
+    textbox.value = '';
     checkboxes.forEach(checkbox => checkbox.checked = false);
     
     scores.risk = 0;
@@ -14,24 +16,57 @@ document.addEventListener('DOMContentLoaded', function() {
     // Clear URL parameters
     const url = new URL(window.location.href);
     url.searchParams.delete('q');
+    url.searchParams.delete('project');
     window.history.replaceState({}, '', url);
     
     renderScores();
   });
 
+  // Add copy link functionality
+  document.querySelector('button[name="copyLink"]').addEventListener('click', function() {
+    const button = this;
+    const originalText = button.textContent;
+    
+    // Copy current URL to clipboard
+    navigator.clipboard.writeText(window.location.href)
+      .then(() => {
+        // Visual feedback
+        button.textContent = 'Copied!';
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 2000);
+      })
+      .catch(err => {
+        console.error('Failed to copy URL:', err);
+        button.textContent = 'Failed to copy';
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 2000);
+      });
+  });
+
   // Function to parse URL parameters
   function getUrlParams() {
-      const params = new URLSearchParams(window.location.search);
-      const selections = params.get('q');
-      if (!selections) return null;
-      return parseInt(selections, 10);
+    const params = new URLSearchParams(window.location.search);
+    return {
+      selections: params.get('q') ? parseInt(params.get('q'), 10) : null,
+      project: params.get('project') || ''
+    };
   }
 
   // Function to set URL with current selections
   function updateUrl(binaryString) {
-      const url = new URL(window.location.href);
-      url.searchParams.set('q', binaryString.toString());
-      window.history.replaceState({}, '', url);
+    const url = new URL(window.location.href);
+    const projectName = document.querySelector('#project').value.trim();
+    
+    url.searchParams.set('q', binaryString.toString());
+    if (projectName) {
+      url.searchParams.set('project', projectName);
+    } else {
+      url.searchParams.delete('project');
+    }
+    
+    window.history.replaceState({}, '', url);
   }
 
 // Sample data
@@ -165,11 +200,21 @@ function setCheckboxesFromBinary(binaryString) {
   updateScores();
 }
 
+// Add project input change handler
+document.querySelector('#project').addEventListener('change', function() {
+  updateScores();
+});
+
 // Modify initial render to check URL parameters
 renderQuestions();
-const urlSelections = getUrlParams();
-if (urlSelections !== null) {
-  setCheckboxesFromBinary(urlSelections);
+const urlParams = getUrlParams();
+
+if (urlParams.project) {
+  document.querySelector('#project').value = urlParams.project;
+}
+
+if (urlParams.selections !== null) {
+  setCheckboxesFromBinary(urlParams.selections);
 } else {
   renderScores();
 }

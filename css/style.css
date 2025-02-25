@@ -11,9 +11,9 @@
   --color-tertiary: #f39c12;
   --color-quaternary: #2c3e50;
   
-  --color-low: #2ecc71;
-  --color-medium: #f1c40f;
-  --color-high: #e74c3c;
+  --color-green: #2ecc71;
+  --color-yellow: #f1c40f;
+  --color-red: #e74c3c;
 }
 
 /* Base styles */
@@ -30,6 +30,14 @@
   padding: var(--size-4);
 }
 
+.column--full {
+  flex: 1;
+  padding: var(--size-4);
+  display: flex;
+  flex-direction: row;
+  gap: var(--size-3);
+}
+
 .column--one {
   flex: 1;
   min-width: 350px;
@@ -42,6 +50,10 @@
   padding: var(--size-4);
 }
 
+.column--center {
+  justify-content: center;
+}
+
 header {
   background-color: var(--color-quaternary);
   color: var(--color-white);
@@ -50,17 +62,29 @@ header {
   display: flex;
 }
 
-.btn--reset {
-  background-color: var(--color-secondary);
+.btn {
+  background-color: var(--color-green);
   border: none;
   border-radius: var(--radius-2);
   color: var(--color-white);
-  cursor: pointer;
   display: inline-block;
-  font-size: var(--font-size-3);
+  font-size: var(--font-size-2);
   padding: var(--size-2) var(--size-3);
   text-align: center;
   text-decoration: none;
+}
+.btn--primary {
+  background-color: var(--color-primary);
+}
+.btn--secondary {
+  background-color: var(--color-secondary);
+}
+.btn--tertiary {
+  background-color: var(--color-tertiary);
+}
+
+.btn--reset {
+  background-color: var(--color-secondary);
 }
 
 /* Heading styles */
@@ -85,6 +109,16 @@ label {
   display: flex;
   font-size: var(--font-size-3);
   margin-bottom: 1rem;
+}
+label[for="project"] {
+  align-items: center;
+  margin-bottom: 0;
+  min-width: max(100%, 100px);
+  width: unset;
+}
+
+.input__text--wide {
+  flex: 1 1 auto;
 }
 
 /* Results styles */
@@ -111,17 +145,17 @@ label {
 }
 
 .score--low {
-  background-color: var(--color-low);
+  background-color: var(--color-green);
   color: var(--color-white);
 }
 
 .score--medium {
-  background-color: var(--color-medium);
+  background-color: var(--color-yellow);
   color: var(--color-white);
 }
 
 .score--high {
-  background-color: var(--color-high);
+  background-color: var(--color-red);
   color: var(--color-white);
 }
 
@@ -137,4 +171,10 @@ label {
   right: 0;
   text-align: center;
   padding: 1rem;
+}
+
+@media print {
+  .noprint {
+    display: none;
+  }
 }

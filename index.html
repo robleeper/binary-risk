@@ -10,15 +10,25 @@
   <body>
     <header>
       <h1>Binary Risk Analysis</h1>
-      <button class="btn--reset" name="reset">Reset</button>
+      <button class="btn btn--primary" name="copyLink">Copy&nbsp;Link</button>
     </header>
     <main>
+      <div class="container">
+        <div class="column column--full">
+          <label for="project" class="">Project: <input type="text" class="input input__text--wide" id="project" name="project" placeholder="Project name" /></label>
+        </div>
+      </div>
       <div class="container">
         <div class="column column--one">
           <h2>Questions</h2>
           <form id="assessment-form">
             <!-- Inject questions here -->
           </form>
+          <div class="container">
+            <div class="column column--full column--center">
+              <button class="btn btn--reset" name="reset">Reset</button>
+            </div>
+          </div>
         </div>
         <div class="column column--two">
           <h2>Scores</h2>
